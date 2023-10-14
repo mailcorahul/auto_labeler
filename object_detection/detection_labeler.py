@@ -78,8 +78,22 @@ class DetectionLabeler:
                             threshold=0.2
                         )
 
+                # rearrange the detections and dump it to results path
                 image_path = self.unlabelled_image_paths[item_idx]
-                imagepath2labels[image_path] = results
+                imagepath2labels[image_path] = []
+                for result in results:
+                    boxes, scores, labels = result["boxes"], result["scores"], result["labels"]
+                    for box, score, label in zip(boxes, scores, labels):
+                        box, score, label = box.tolist(), score.tolist(), label.tolist()
+                        box = [round(i, 2) for i in box]
+                        detection = {
+                            "box": box,
+                            "score": round(score, 4),
+                            "label": self.class_texts[0][label]
+                        }
+
+                        # print(type(box), type(score), type(label))
+                        imagepath2labels[image_path].append(detection)
 
                 if self.viz:
                     for result in results:
@@ -97,3 +111,6 @@ class DetectionLabeler:
 
                         filename = os.path.split(image_path)[1]
                         image.save(os.path.join(self.viz_path, filename))
+
+        with open(self.result_path, "w") as f:
+            json.dump(imagepath2labels, f, indent=2)
