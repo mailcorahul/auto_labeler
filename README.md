@@ -2,7 +2,7 @@
 
 # Introduction
 
-auto_labeler is a simple, easy-to-use framework which helps you generate high quality pseudo-labels for any given computer vision task at hand. This library abstracts away all the various SOTA algorithms in play for Computer Vision, their modes of usage(like image based retrieval, text to image retrieval, feature matching for classification, zero shot or single shot promptable detection or instance segmentation or exploiting LLMs to auto label any vision dataset.
+**auto_labeler** is a simple, easy-to-use framework which helps you generate high quality pseudo-labels for any given computer vision task at hand. This library abstracts away all the various SOTA algorithms in play for Computer Vision, their modes of usage(like** image based retrieval, text to image retrieval, feature matching for classification, zero shot or single shot promptable detection or instance segmentation or exploiting LLMs**) to auto label any vision dataset.
 
 # Features
 
@@ -27,6 +27,43 @@ To be released in the near future:
 
 # Usage
 
-**Setup repo and environment**
+**Setup repo and environment:**
 
-```git clone git@github.com:mailcorahul/auto_labeler.git```
+```
+git clone git@github.com:mailcorahul/auto_labeler.git
+cd auto_labeler/
+```
+
+**Setup your python virtualenv(preferably python3.8):**
+```
+pip install -r requirements.txt
+```
+
+**To label any dataset for image classification task:**
+```
+cd image_classification
+python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
+ --class2prompts 'path to a json containing class names along with its text prompts if already known(optional)'
+ --result-path 'path to save the auto labeled classification data'
+```
+
+**To label any dataset for object detection task:**
+```
+cd object_detection
+python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
+ --class-texts-path 'path to a json containing the list of class objects to detect'
+ --prompt-images 'path to prompt images for guided one shot detection'
+ --result-path 'path to save the auto labeled detection data'
+ --viz 'False(set to True if visualization is required)'
+ --viz-path 'path to save detection bbox visualizations'
+```
+
+**To label any dataset for instance segmentation task:**
+```
+cd instance_segmentation
+python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
+ --class-texts-path 'path to a json containing the list of class objects to segment'
+ --result-path 'path to save the auto labeled segmentation data'
+ --viz 'False(set to True if visualization is required)'
+ --viz-path 'path to save mask visualizations'
+```
