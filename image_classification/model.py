@@ -5,7 +5,6 @@ class Models:
 
     def __init__(self):
         self.batch_size = 128
-        pass
 
     def create_clip_arch(self):
         model, _, preprocess = open_clip.create_model_and_transforms(

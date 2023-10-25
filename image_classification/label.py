@@ -2,7 +2,6 @@ import os
 import argparse
 
 from classification_labeler import ClassificationLabeler
-from text2image import Text2ImageRetrieval
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--unlabelled-dump', help='path to unlabelled data dump')
@@ -13,9 +12,5 @@ args = parser.parse_args()
 
 if __name__ == '__main__':
 
-    labeler = Text2ImageRetrieval(
-        args.class2prompts,
-        args.unlabelled_dump,
-        args.result_path
-    )
+    labeler = ClassificationLabeler(args)
     labeler.label_images()
