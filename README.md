@@ -6,7 +6,7 @@
 
 # Features
 
-**1. High Abstraction**: 
+**1. High Abstraction**:
 auto_labeler provides inbuilt wrappers over exisiting widely used frameworks such as HuggingFace, facebook-research and other key repos which are the sources of key SOTA architecures and models. Its generic, uniform interface provides easy access to most of the SOTA Computer Vision techniques, abstracting away most of the information which can be otherwise ignored by researchers, companies.
 
 **2. Modular Interface**:
@@ -44,7 +44,7 @@ pip install -r requirements.txt
 cd image_classification
 python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
  --class2prompts 'path to a json containing class names along with its text prompts if already known(optional)'
- --result-path 'path to save the auto labeled classification data'
+ --result-path 'root folder path to save the auto labeled classification data'
 ```
 
 **To label any dataset for object detection task:**
@@ -53,7 +53,7 @@ cd object_detection
 python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
  --class-texts-path 'path to a json containing the list of class objects to detect'
  --prompt-images 'path to prompt images for guided one shot detection'
- --result-path 'path to save the auto labeled detection data'
+ --result-path 'path to .json file to save the auto labeled detection data'
  --viz 'False(set to True if visualization is required)'
  --viz-path 'path to save detection bbox visualizations'
 ```
@@ -63,7 +63,7 @@ python label.py --unlabelled-dump 'path to the unlabelled dataset containing ima
 cd instance_segmentation
 python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
  --class-texts-path 'path to a json containing the list of class objects to segment'
- --result-path 'path to save the auto labeled segmentation data'
+ --result-path 'path to .pkl file to save the auto labeled segmentation data'
  --viz 'False(set to True if visualization is required)'
  --viz-path 'path to save mask visualizations'
 ```
