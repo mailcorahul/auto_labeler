@@ -67,3 +67,16 @@ python label.py --unlabelled-dump 'path to the unlabelled dataset containing ima
  --viz 'False(set to True if visualization is required)'
  --viz-path 'path to save mask visualizations'
 ```
+
+# List of architectures supported for various vision tasks
+
+## 1. image classification:
+- [CLIP](https://github.com/mlfoundations/open_clip)
+
+## 2. object detection:
+- [OWL-ViT-v2](https://huggingface.co/docs/transformers/model_doc/owlvit)
+
+## 3. instance segmentation:
+- [Segment Anything(SAM)](https://huggingface.co/docs/transformers/main/model_doc/sam)
+
+
