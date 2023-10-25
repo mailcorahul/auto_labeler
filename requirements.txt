@@ -27,7 +27,6 @@ open-clip-torch==2.22.0
 opencv-python==4.8.1.78
 packaging==23.2
 Pillow==10.0.1
-pkg_resources==0.0.0
 protobuf==3.20.3
 PyYAML==6.0.1
 regex==2023.10.3
