@@ -70,13 +70,13 @@ python label.py --unlabelled-dump 'path to the unlabelled dataset containing ima
 
 # List of architectures supported for various vision tasks
 
-## 1. image classification:
+## 1. Image Classification:
 - [CLIP](https://github.com/mlfoundations/open_clip)
 
-## 2. object detection:
+## 2. Object Detection:
 - [OWL-ViT-v2](https://huggingface.co/docs/transformers/model_doc/owlvit)
 
-## 3. instance segmentation:
+## 3. Instance Segmentation:
 - [Segment Anything(SAM)](https://huggingface.co/docs/transformers/main/model_doc/sam)
 
 
