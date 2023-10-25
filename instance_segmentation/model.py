@@ -1,5 +1,5 @@
 from transformers import pipeline
-from segment_anything import sam_model_registry, SamPredictor
+# from segment_anything import sam_model_registry, SamPredictor
 
 from config import INSTANCE_SEGMENTOR_CONFIG
 
@@ -19,7 +19,7 @@ class Models:
         if model_arch == "SAM-ViT":
             if label_mode == "zero-shot":
                 generator = pipeline("mask-generation", model="facebook/sam-vit-base", device=self.device)
-                # sam_checkpoint = "/opt/infilect/dev2/models/sam_vit_h_4b8939.pth"
+                # sam_checkpoint = "/tmp/models/sam_vit_h_4b8939.pth"
                 # model_type = "vit_h"
 
                 # sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)

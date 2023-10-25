@@ -3,6 +3,7 @@ import cv2
 import json
 import numpy as np
 
+import pickle
 import torch
 import torch.nn as nn
 import torchvision.models as models
@@ -14,7 +15,7 @@ import matplotlib.pyplot as plt
 
 from dataset import SegmentationCustomDataset, SegmentationDataset
 
-from visualization import show_masks_on_image
+from visualization import draw_mask
 
 from config import INSTANCE_SEGMENTOR_CONFIG
 from model import Models
@@ -57,7 +58,6 @@ class InstanceSegmentationLabeler:
             image_paths=self.unlabelled_image_paths,
             batch_size=self.model_data["batch_size"]
         )
-        dataloader = DataLoader(dataset, batch_size=self.model_data["batch_size"], shuffle=False)
 
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         model = self.model_data["model"]
@@ -86,18 +86,17 @@ class InstanceSegmentationLabeler:
                     # print(output)
 
                 if self.viz:
-                    for image, output in zip(batch_images, outputs):
+                    for idx, (image, output) in enumerate(zip(batch_images, outputs)):
                         masks = output["masks"]
-                        h, w = masks[0].shape[-2:]
-                        mask_image = (np.ones((h, w, 3)) * 255)
+                        mask_image = cv2.imread(batched_image_paths[idx])
+                        filename = os.path.split(batched_image_paths[idx])[1]
                         for mask in masks:
-                            color = np.concatenate([np.random.random(3)]) * 255#, np.array([0.6])], axis=0)
-                            h, w = mask.shape[-2:]
-                            mask_image = mask_image * (mask.reshape(h, w, 1) * color.reshape(1, 1, -1))
+                            mask_ = np.stack((mask,)*3, axis=-1)
+                            mask_image = draw_mask(mask_image, mask_)
 
-                        cv2.imwrite("/tmp/sam.png", mask_image)
+                        cv2.imwrite(os.path.join(self.viz_path, filename), mask_image)
                         # show_masks_on_image(image, masks)
 
 
-        # with open(self.result_path, "w") as f:
-        #     json.dump(imagepath2labels, f, indent=2)
+        with open(self.result_path, "wb") as f:
+            pickle.dump(imagepath2labels, f)
