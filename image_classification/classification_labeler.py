@@ -1,5 +1,6 @@
 from image2image import Image2ImageRetrieval
 from text2image import Text2ImageRetrieval
+from VLM import VisionLanguageModel
 
 from config import IMAGE_CLASSIFIER_CONFIG
 

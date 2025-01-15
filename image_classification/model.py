@@ -1,6 +1,8 @@
 from config import IMAGE_CLASSIFIER_CONFIG
 
-from transformers import AutoProcessor, LlavaNextForConditionalGeneration
+import torch
+from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration
+from transformers import AutoProcessor, AutoModelForImageTextToText, AutoModelForVision2Seq
 import open_clip
 
 class Models:
@@ -25,20 +27,6 @@ class Models:
 
         return model_data
 
-    def create_llava_next_arch(self):
-
-        model = LlavaNextForConditionalGeneration.from_pretrained(
-            "llava-hf/llava-v1.6-mistral-7b-hf")
-        processor = AutoProcessor.from_pretrained("llava-hf/llava-v1.6-mistral-7b-hf")
-        prompt = "[INST] <image>\nWhat is shown in this image? [/INST]"
-
-        model_data = {
-            "model": model,
-            "processor": processor,
-            "prompt": prompt
-        }
-
-        return model_data
 
     def create_model(self):
         """Instantiate the network class and initialize with pretrained weights."""
@@ -53,6 +41,3 @@ class Models:
 
         elif model_arch == "blip2":
             pass
-
-        elif model_arch == "LLaVA-NeXT":
-            return self.create_llava_next_arch()
