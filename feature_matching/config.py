@@ -1,3 +1,12 @@
+"""
+supported models: [
+    "stevenbucaille/superglue_indoor"
+]
+
+"""
+
+
 FEATURE_MATCHING_CONFIG = {
-    "model": "stevenbucaille/superglue_indoor"
+    "model": "loftr",
+    "viz": False
 }

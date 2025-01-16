@@ -1,6 +1,7 @@
 from transformers import AutoImageProcessor, AutoModel
 
 from config import FEATURE_MATCHING_CONFIG
+from models.loftr import LoFTRModel
 
 class Models:
 
@@ -18,6 +19,20 @@ class Models:
             }
         return model_data
 
+
+    def create_loftr(self):
+
+        loftr = LoFTRModel()
+        processor = None
+        model_data = {
+                "model": loftr,
+                "processor": processor,
+                "batch_size": self.batch_size
+            }
+
+        return model_data
+
+
     def create_model(self):
         """Instantiate the network class and initialize with pretrained weights."""
 
@@ -25,7 +40,7 @@ class Models:
         model_arch = FEATURE_MATCHING_CONFIG["model"]
 
         if "superglue" in model_arch:
-            model_data = self.create_superglue_arch(model_arch)
+            return  self.create_superglue_arch(model_arch)
 
-        return model_data
-
+        elif model_arch == "loftr":
+            return self.create_loftr()

@@ -16,6 +16,7 @@ if __name__ == '__main__':
 
     labeler = FeatureMatchingLabeler(
         args.unlabelled_dump,
+        args.reference_images,
         args.result_path,
         args.viz,
         args.viz_path

@@ -27,7 +27,6 @@ class FeatureMatchingLabeler:
 
         self.model_data = Models().create_model()
         self.model, self.processor = self.model_data["model"], self.model_data["processor"]
-        self.label_mode = FEATURE_MATCHING_CONFIG["auto_label_mode"]
 
         self.unlabelled_image_paths = []
         self.reference_image_paths = []
@@ -51,10 +50,11 @@ class FeatureMatchingLabeler:
 
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         model = self.model_data["model"]
-        model = model.to(device)
+
 
         # match every reference image with every unlabeled image and get the positive matches
         if FEATURE_MATCHING_CONFIG["model"] == "superglue":
+            model = model.to(device)
             for ref_idx, ref_image_path in enumerate(self.reference_image_paths):
                 ref_image = Image.open(ref_image_path)
                 for image_idx, image_path in enumerate(self.unlabelled_image_paths):
@@ -71,3 +71,13 @@ class FeatureMatchingLabeler:
                             image_sizes,
                             threshold=0.0
                         )
+
+        elif FEATURE_MATCHING_CONFIG["model"] == "loftr":
+            for ref_idx, ref_image_path in enumerate(self.reference_image_paths):
+                ref_image = Image.open(ref_image_path)
+                for image_idx, image_path in enumerate(self.unlabelled_image_paths):
+                    image_to_label = Image.open(image_path)
+                    mkpts0, mkpts1, Fm, inliers = model.forward(ref_image_path, image_path)
+
+                    if FEATURE_MATCHING_CONFIG["viz"] == True:
+                        model.viz(mkpts0, mkpts1, inliers)
