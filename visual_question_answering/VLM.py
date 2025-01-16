@@ -34,15 +34,52 @@ class VisionLanguageModel:
         model = model.to(device)
         max_new_tokens = 100
 
+        if "qwen" in VQA_CONFIG["model"]:
+            for image_path in self.unlabelled_image_paths:
+                image = Image.open(image_path)
+                conversation = [
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "image",
+                                "image": image,
+                            },
+                            {"type": "text", "text": prompt},
+                        ],
+                    }
+                ]
 
-        for image_path in self.unlabelled_image_paths:
-            image = Image.open(image_path)
-            image = load_image(image_path)
-            inputs = processor(text=prompt, images=image, return_tensors="pt").to(torch.float16).to(device)
-            generate_ids = model.generate(**inputs, max_new_tokens=max_new_tokens)
-            generated_text = processor.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+                # Preparation for inference
+                # text_prompt = processor.apply_chat_template(conversation, add_generation_prompt=True)
+                inputs = processor(
+                    text=[prompt], images=[image], padding=True, return_tensors="pt"
+                )
+                inputs = inputs.to("cuda")
 
-            self.pseudo_labels[image_path] = generated_text
+                # Inference: Generation of the output
+                generated_ids = model.generate(**inputs, max_new_tokens=128)
+                generated_ids = [
+                    output_ids[len(input_ids):]
+                        for input_ids, output_ids in zip(inputs.input_ids, output_ids)
+                    ]
+                output_text = processor.batch_decode(
+                    generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True
+                )
+                print(output_text)
+
+        else:
+            for image_path in self.unlabelled_image_paths:
+                if "paligemma" in VQA_CONFIG["model"]:
+                    image = load_image(image_path)
+                else:
+                    image = Image.open(image_path)
+
+                inputs = processor(text=prompt, images=image, return_tensors="pt").to(torch.float16).to(device)
+                generate_ids = model.generate(**inputs, max_new_tokens=max_new_tokens)
+                generated_text = processor.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+
+                self.pseudo_labels[image_path] = generated_text
 
         with open(self.result_path, "w") as f:
             json.dump(self.pseudo_labels, f, indent=2)
