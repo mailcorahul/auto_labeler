@@ -69,10 +69,23 @@ List of architectures supported for various vision tasks
 #### 3. Instance Segmentation:
 - [Segment Anything(SAM)](https://huggingface.co/docs/transformers/main/model_doc/sam)
 
+#### 4. Visual Question Answering:
+- [LLaVA-NeXT](https://huggingface.co/docs/transformers/en/model_doc/llava_next)
+- [SmolVLM](https://huggingface.co/HuggingFaceTB/SmolVLM-Instruct)
+- [PaliGemma2](https://huggingface.co/docs/transformers/en/model_doc/paligemma)
+- [Qwen2-VL](https://huggingface.co/docs/transformers/en/model_doc/qwen2_vl)
+- [BLIP](https://huggingface.co/docs/transformers/en/model_doc/blip)
+
+#### 5. Feature Matching:
+- [Local Feature Matching with Transformers(LoFTR)](https://kornia.github.io/tutorials/nbs/image_matching.html)
+
+#### 6. OCR:
+- [Transformer-based Optical Character Recognition with Pre-trained Models(TrOCR)](https://huggingface.co/docs/transformers/v4.48.0/en/model_doc/trocr#overview)
+- [docTR by Mindee](https://github.com/mindee/doctr)
+
 
 ### Image Classification
 
-**To label any dataset for image classification task:**
 ```
 cd image_classification
 python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
@@ -82,7 +95,6 @@ python label.py --unlabelled-dump 'path to the unlabelled dataset containing ima
 
 ### Object Detection
 
-**To label any dataset for object detection task:**
 ```
 cd object_detection
 python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
@@ -95,7 +107,6 @@ python label.py --unlabelled-dump 'path to the unlabelled dataset containing ima
 
 ### Instance Segmentation
 
-**To label any dataset for instance segmentation task:**
 ```
 cd instance_segmentation
 python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
@@ -107,11 +118,28 @@ python label.py --unlabelled-dump 'path to the unlabelled dataset containing ima
 
 ### Visual Question Answering
 
+```
+cd visual_question_answering
+python label.py --unlabelled-dump 'path to the unlabelled dataset containing images to be described'
+ --result-path 'path to json containing labeled VQA data'
+```
+
 
 ### Feature Matching
+
+```
+cd feature_matching
+python label.py --unlabelled-dump 'path to the unlabelled dataset containing images'
+--reference-images 'path to reference/index images which is supposed to be retrieved/matched with'
+--result-path 'root folder to contain subfolders(for every reference) with retrieved images'
+```
 
 
 ### OCR
 
-
+```
+cd ocr
+python label.py --unlabelled-dump 'path to the unlabelled dataset containing document images'
+ --result-path 'path to json containing labeled OCR data'
+```
 
