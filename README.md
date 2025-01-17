@@ -15,6 +15,11 @@ A library to automatically label any computer vision dataset at zero/near-zero m
     - [OCR](#ocr)
 
 
+## TODO
+1. Add config driven prompting for VLMs
+2. Enable visualization for LoFTR
+3. Support for SuperGlue and other classical CV Feature matching algorithms such as SIFT, SURF etc.
+
 ## Introduction
 
 **auto_labeler** is a simple, easy-to-use framework which helps you generate high quality pseudo-labels for any given computer vision task at hand. This library abstracts away all the various SOTA algorithms in play for Computer Vision, their modes of usage(like** image based retrieval, text to image retrieval, feature matching for classification, zero shot or single shot promptable detection or instance segmentation or exploiting LLMs**) to auto label any vision dataset.
