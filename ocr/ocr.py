@@ -34,7 +34,7 @@ class OCR:
         model = model.to(device)
         max_new_tokens = 100
 
-        for image_path in self.unlabelled_image_paths:
+        for image_path in tqdm(self.unlabelled_image_paths):
             image = Image.open(image_path).convert("RGB")
             if OCR_CONFIG["model"] == "mindee/doctr":
                 doc = DocumentFile.from_images(image_path)
@@ -55,4 +55,5 @@ class OCR:
     def label_images(self):
         """Labels image classification data based on the inputs config params."""
 
+        print('[/] labeling images...')
         self.label_images_for_ocr_task()

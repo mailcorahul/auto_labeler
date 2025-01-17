@@ -36,8 +36,8 @@ class Models:
     def create_model(self):
         """Instantiate the network class and initialize with pretrained weights."""
 
-        print('[/] creating model...')
         model_arch = FEATURE_MATCHING_CONFIG["model"]
+        print(f'[/] creating {model_arch}...')
 
         if "superglue" in model_arch:
             return  self.create_superglue_arch(model_arch)

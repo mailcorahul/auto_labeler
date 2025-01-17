@@ -55,7 +55,7 @@ class FeatureMatchingLabeler:
         # match every reference image with every unlabeled image and get the positive matches
         if FEATURE_MATCHING_CONFIG["model"] == "superglue":
             model = model.to(device)
-            for ref_idx, ref_image_path in enumerate(self.reference_image_paths):
+            for ref_idx, ref_image_path in tqdm(enumerate(self.reference_image_paths)):
                 ref_image = Image.open(ref_image_path)
                 for image_idx, image_path in enumerate(self.unlabelled_image_paths):
                     image_to_label = Image.open(image_path)
@@ -73,7 +73,7 @@ class FeatureMatchingLabeler:
                         )
 
         elif FEATURE_MATCHING_CONFIG["model"] == "loftr":
-            for ref_idx, ref_image_path in enumerate(self.reference_image_paths):
+            for ref_idx, ref_image_path in tqdm(enumerate(self.reference_image_paths)):
                 ref_image = Image.open(ref_image_path)
                 for image_idx, image_path in enumerate(self.unlabelled_image_paths):
                     image_to_label = Image.open(image_path)

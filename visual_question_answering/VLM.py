@@ -35,7 +35,7 @@ class VisionLanguageModel:
         max_new_tokens = 100
 
         if "qwen" in VQA_CONFIG["model"]:
-            for image_path in self.unlabelled_image_paths:
+            for image_path in tqdm(self.unlabelled_image_paths):
                 image = Image.open(image_path)
                 conversation = [
                     {
@@ -69,7 +69,7 @@ class VisionLanguageModel:
                 print(output_text)
 
         else:
-            for image_path in self.unlabelled_image_paths:
+            for image_path in tqdm(self.unlabelled_image_paths):
                 if "paligemma" in VQA_CONFIG["model"]:
                     image = load_image(image_path)
                 else:
@@ -88,4 +88,5 @@ class VisionLanguageModel:
     def label_images(self):
         """Labels image classification data based on the inputs config params."""
 
+        print('[/] labeling images...')
         self.label_images_using_vlm()
