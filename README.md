@@ -13,6 +13,7 @@ A library to automatically label any computer vision dataset at zero/near-zero m
     - [Visual Question Answering](#visual-question-answering)
     - [Feature Matching](#feature-matching)
     - [OCR](#ocr)
+- [Usage - auto_labeler](#usage)
 
 
 ## TODO
@@ -65,28 +66,31 @@ pip install -r requirements.txt
 
 List of architectures supported for various vision tasks
 
-#### 1. Image Classification:
+### Image Classification:
 - [CLIP](https://github.com/mlfoundations/open_clip)
 
-#### 2. Object Detection:
+### Object Detection:
 - [OWL-ViT-v2](https://huggingface.co/docs/transformers/model_doc/owlvit)
 
-#### 3. Instance Segmentation:
+### Instance Segmentation:
 - [Segment Anything(SAM)](https://huggingface.co/docs/transformers/main/model_doc/sam)
 
-#### 4. Visual Question Answering:
+### Visual Question Answering:
 - [LLaVA-NeXT](https://huggingface.co/docs/transformers/en/model_doc/llava_next)
 - [SmolVLM](https://huggingface.co/HuggingFaceTB/SmolVLM-Instruct)
 - [PaliGemma2](https://huggingface.co/docs/transformers/en/model_doc/paligemma)
 - [Qwen2-VL](https://huggingface.co/docs/transformers/en/model_doc/qwen2_vl)
 - [BLIP](https://huggingface.co/docs/transformers/en/model_doc/blip)
 
-#### 5. Feature Matching:
+### Feature Matching:
 - [Local Feature Matching with Transformers(LoFTR)](https://kornia.github.io/tutorials/nbs/image_matching.html)
 
-#### 6. OCR:
+### OCR:
 - [Transformer-based Optical Character Recognition with Pre-trained Models(TrOCR)](https://huggingface.co/docs/transformers/v4.48.0/en/model_doc/trocr#overview)
 - [docTR by Mindee](https://github.com/mindee/doctr)
+
+
+## Usage
 
 
 ### Image Classification
